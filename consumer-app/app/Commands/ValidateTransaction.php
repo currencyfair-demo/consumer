@@ -10,6 +10,8 @@ use Illuminate\Contracts\Queue\ShouldBeQueued;
 class ValidateTransaction extends Command implements SelfHandling, ShouldBeQueued {
 
 	use InteractsWithQueue, SerializesModels;
+
+	private static $LIST_LEN = 10;
 	private $redis;
 
 	private $transaction;
@@ -35,8 +37,24 @@ class ValidateTransaction extends Command implements SelfHandling, ShouldBeQueue
 
 	public function fire($job, $data)
 	{
-		$this->redis->publish('trnx', json_encode($data));
+		$this->broadcast_trnx($data);
+		$this->store($data);
 		$job->delete();
 	}
+	
+	private function broadcast_trnx($data)
+	{
+		$this->redis->publish('trnx', json_encode($data));
+	}
+
+	/**
+	 * Remember only last LIST_LEN transactions
+	 *
+	 */
+	private function store($data)
+	{
+		$this->redis->lpush('transactions', json_encode($data));
+		$this->redis->ltrim('transactions', 0, self::$LIST_LEN);
+	}	
 
 }
