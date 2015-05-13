@@ -11,7 +11,7 @@ class ValidateTransaction extends Command implements SelfHandling, ShouldBeQueue
 
 	use InteractsWithQueue, SerializesModels;
 
-	private static $LIST_LEN = 10;
+	private static $LIST_LEN = 9;
 	private $redis;
 
 	private $transaction;
