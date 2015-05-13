@@ -27,5 +27,6 @@ RUN apt-get purge -y curl
 EXPOSE 8080
 VOLUME ["/var/www/blog"]
 COPY consumer-app /var/www/blog
+RUN chown -R www-data:www-data
 
 CMD ["php5-fpm", "--nodaemonize"]
