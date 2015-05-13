@@ -16,6 +16,7 @@ RUN a2enmod actions fastcgi alias rewrite
 COPY fastcgi-host.conf /etc/apache2/mods-enabled/fastcgi.conf
 COPY api.poovelil.org.conf /etc/apache2/sites-enabled/api.poovelil.org.conf
 
+VOLUME ["/var/www/blog"]
 COPY consumer-app /var/www/blog
 
 EXPOSE 80

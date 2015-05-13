@@ -13,8 +13,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y php5-fpm
 			curl 
 
 
-COPY www-fpm.conf /etc/php5/fpm/pool.d/www.conf
-
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer global require "laravel/installer=~1.1"
@@ -24,8 +22,7 @@ RUN composer global require "predis/predis ~1.1@dev"
 ENV  PATH ~/.composer/vendor/bin:$PATH
 RUN apt-get purge -y curl
 
-EXPOSE 8080
 VOLUME ["/var/www/blog"]
 COPY consumer-app /var/www/blog
 
-CMD ["php5-fpm", "--nodaemonize"]
+CMD ["php", "/var/www/blog/artisan", "queue:listen"]
