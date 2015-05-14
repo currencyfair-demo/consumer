@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Commands\ValidateTransaction;
+use App\Validator\CurrencyTransactionValidator;
 
 class CurrencyFairController extends Controller
 {
@@ -30,4 +31,13 @@ class CurrencyFairController extends Controller
 			echo 'Transaction accepted for processing';
 		}
 	}
+	
+	public function countryList(Request $request) {
+		return json_encode(\App\Validators\CurrencyTransactionValidator::$countries);
+	}
+
+	public function currencyList(Request $request) {
+		return json_encode(\App\Validators\CurrencyTransactionValidator::$currencies);
+	}	
+	
 }

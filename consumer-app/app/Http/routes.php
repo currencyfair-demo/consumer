@@ -20,6 +20,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::resource('currency', 'CurrencyFairController', 
-	['only' => ['store']]
-);
+
+Route::post('currency/transact', 'CurrencyFairController@store');
+Route::get('currency/countries', 'CurrencyFairController@countryList');
+Route::get('currency/currencies', 'CurrencyFairController@currencyList');
