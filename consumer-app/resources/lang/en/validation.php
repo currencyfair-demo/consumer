@@ -89,6 +89,18 @@ return [
 		'attribute-name' => [
 			'rule-name' => 'custom-message',
 		],
+		'currencyTo' => [
+			'currency' => 'currency code not supported. To get a list of supported currency codes make a GET request to /currency/currencies'
+		],
+		'currencyFrom' => [
+			'currency' => 'currency code not supported. To get a list of supported currency codes make a GET request to /currency/currencies'
+		],
+		'originatingCountry' => [
+			'country' => ':attribute is not recognized. To get a list of country codes make a GET request to /currency/countries'	
+		],
+		'rate' => [
+			'rate' => 'amountBuy != rate * amountSell'
+		]
 	],
 
 	/*

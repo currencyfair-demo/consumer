@@ -15,7 +15,9 @@
 	},
 	"autoload": {
 		"classmap": [
-			"database"
+			"database",
+			"app/Validators",
+			"app/Services"
 		],
 		"psr-4": {
 			"App\\": "app/"
