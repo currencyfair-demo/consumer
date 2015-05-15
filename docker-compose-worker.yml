@@ -1,0 +1,10 @@
+workers:
+  image: poovelil/worker
+  links:
+    - redis
+    - beanstalkdq:q
+redis:
+   image: poovelil/mem-db
+beanstalkdq:
+   image: poovelil/queue:latest
+

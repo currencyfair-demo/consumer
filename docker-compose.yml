@@ -1,0 +1,29 @@
+lb:
+  image: poovelil/lb:latest
+  links:
+    - ui:ui
+    - webserver:webserver
+  ports: 
+    - "80:80"
+webserver:
+   image: poovelil/webserver:latest
+   links: 
+     - fpm
+ui:
+   image: poovelil/frontend:latest
+   links:
+     - redis
+fpm:
+   build: .
+   links: 
+     - redis
+     - beanstalkdq:q
+redis:
+   image: poovelil/mem-db:latest
+beanstalkdq:
+   image: poovelil/queue:latest 
+workers:
+   image: poovelil/worker:latest
+   links:
+     - redis
+     - beanstalkdq:q
