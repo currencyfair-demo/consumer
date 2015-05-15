@@ -8,8 +8,7 @@ RUN echo 'deb http://ftp.debian.org/debian/ jessie-updates main contrib non-free
 RUN echo 'deb-src http://ftp.debian.org/debian/ jessie-updates main contrib non-free' >> /etc/apt/sources.list
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y apache2-mpm-worker\ 
-			libapache2-mod-fastcgi \
-			curl 
+			libapache2-mod-fastcgi
 
 RUN a2enmod actions fastcgi alias rewrite
 
@@ -17,7 +16,7 @@ COPY fastcgi-host.conf /etc/apache2/mods-enabled/fastcgi.conf
 COPY api.poovelil.org.conf /etc/apache2/sites-enabled/api.poovelil.org.conf
 
 VOLUME ["/var/www/blog"]
-COPY consumer-app /var/www/blog
+RUN mkdir /var/www/blog/public
 
 EXPOSE 80
 
